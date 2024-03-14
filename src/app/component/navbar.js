@@ -19,7 +19,7 @@ export default function Navbar() {
             dispatch(fetchMerchant());
             themeChange();
         }
-    }, []);
+    }, [fetchThemeData]);
 
     const themeChange = () => {
         fetchThemeData();
