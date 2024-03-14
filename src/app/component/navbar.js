@@ -2,11 +2,13 @@
 import { fetchMerchant } from "@/redux/slices/merchantSlice";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import themeSwitcher from "../theme/themeSwitcher";
 
 export default function Navbar() {
     const dispatch = useDispatch();
     // const [name, setName] = useState("Demo");
     // const [image, setImage] = useState("");
+    const { fetchThemeData } = themeSwitcher();
 
     const name = useSelector(state => state.merchant.merchantName);
     const image = useSelector(state => state.merchant.merchantLogo);
@@ -15,8 +17,13 @@ export default function Navbar() {
         if (typeof window !== "undefined") {
             // Fetch data only on the client-side
             dispatch(fetchMerchant());
+            themeChange();
         }
     }, []);
+
+    const themeChange = () => {
+        fetchThemeData();
+    };
 
     return (
         <main>
@@ -26,9 +33,9 @@ export default function Navbar() {
                         <img src={image} className="h-8" alt="Logo" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{name}</span>
                     </a>
-                    <div className="flex items-center space-x-6 rtl:space-x-reverse">
-                        <a href="tel:5541251234" className="text-sm  text-gray-500 dark:text-white hover:underline">Cart</a>
-                        <button className="text-lg  text-blue-600 dark:text-blue-500 hover:underline ">☼</button>
+                    <div className="flex items-center space-x-6 rtl:space-x-reverse mr-4">
+                        <a href="/" className="text-lg  text-gray-500 dark:text-white hover:underline">Cart</a>
+                        <button className="text-2xl hover:underline dark:text-white" onClick={themeChange}>☼</button>
                     </div>
                 </div>
             </nav>

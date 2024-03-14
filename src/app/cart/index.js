@@ -12,7 +12,6 @@ export default function Cart() {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.products.loading);
     const error = useSelector((state) => state.products.error);
-    // const [products, setProducts] = useState([]);
     const data = useSelector(state => state.products);
     const products = useSelector((state) => state.products.products);
 
@@ -40,11 +39,18 @@ export default function Cart() {
         router.push('/paymentmethod');
     };
 
+    const refreshPage =()=>{
+        window.location.reload(true);
+    }
+
     return (
         <>
-         <CheckoutSteps step1={true} step2={false} step3={false} />
+            <CheckoutSteps step1={true} step2={false} step3={false} />
             <div className="container mx-auto px-4">
-                <h1 className="text-3xl font-semibold my-8">My Cart</h1>
+                <div className='flex justify-between items-center pl-4 mx-auto'>
+                    <h1 className="text-3xl font-semibold my-8">My Cart</h1>
+                    <button className='text-3xl font-semibold my-8' onClick={refreshPage}> 🔄 </button>
+                </div>
                 {loading ? (
                     <Message>Loading...</Message>
                 ) : error ? (
@@ -86,7 +92,7 @@ export default function Cart() {
                         </div>
                     </div>
                 )}
-            </div> 
+            </div>
         </>
     );
 }
