@@ -16,7 +16,6 @@ export default function OrderDetails() {
     const error = useSelector((state) => state.products.error);
     const products = useSelector((state) => state.products.products);
     const method = useSelector((state) => state.paymentMethod)
-    const [isDelivered, setIsDelivered] = useState(Math.floor(Math.random() * 2));
     const [isPaid, setIsPaid] = useState(Math.floor(Math.random() * 3));
 
     const itemsPrice = products?.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
@@ -52,7 +51,7 @@ export default function OrderDetails() {
                                         <strong>Address: </strong>
                                         Dr. Sammy Bergstrom, South Aritown, 73124, Pennsylvania
                                     </p>
-                                    {isDelivered === 1 ?
+                                    {isPaid === 2 ?
                                         <Message variant='success'>Delivered on 15th March, 2023</Message> :
                                         <Message variant='error'>Not Delivered</Message>
                                     }

@@ -2,11 +2,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import productReducer from './slices/productSlice';
 import paymentReducer from './slices/paymentSlice';
+import merchantReducer from './slices/merchantSlice';
 
 const store = configureStore({
     reducer: {
         products: productReducer,
-        paymentMethod: paymentReducer
+        paymentMethod: paymentReducer,
+        merchant: merchantReducer
     },
 });
 

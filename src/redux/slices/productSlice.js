@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     loading: false,
     products: [],
-    methods: null,
+    methods: ['UPI', 'CARDS'],
     error: null,
 };
 
@@ -18,7 +18,6 @@ const productSlice = createSlice({
         fetchProductsSuccess(state, action) {
             state.loading = false;
             state.products = action.payload.products;
-            state.methods = action.payload.paymentMethods;
             state.error = null;
         },
         fetchProductsFailure(state, action) {

@@ -6,22 +6,17 @@ import CheckoutSteps from '../component/checkoutsteps';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '@/redux/slices/productSlice';
 import { setSelectedPaymentMethod } from '@/redux/slices/paymentSlice';
+import PaymentOption from '../component/paymentOption';
+
 export default function PaymentMethod() {
+    const dispatch = useDispatch();
     const router = useRouter();
     const [selectedMethod, setSelectedMethod] = useState('');
     const [selectedMethodId, setSelectedMethodId] = useState('');
-    const dispatch = useDispatch();
     const loading = useSelector((state) => state.products.loading);
     const error = useSelector((state) => state.products.error);
-    // const methods = useSelector((state) => state.products.methods);
-    const [methods, setMethods] = useState(['UPI', "CARDS"]);
-    const products = useSelector((state) => state.products);
-
-    // useEffect(() => {
-    //     dispatch(fetchProducts());
-    //     // Fetch products from API
-    //     console.log(methods);
-    // }, [dispatch]);
+    const methods = useSelector((state) => state.products.methods);
+    const products = useSelector(state=>state.products);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -60,6 +55,7 @@ export default function PaymentMethod() {
         setSelectedMethodId(id);
         setSelectedMethod(method);
     }
+
     return (
         <>
             <CheckoutSteps step1={true} step2={true} step3={false} />
@@ -77,7 +73,7 @@ export default function PaymentMethod() {
                                     selected={selectedMethodId === id}
                                     onSelect={() => selectHandler(id, method)}
                                 />
-                                ))}
+                            ))}
                         </div>
                         <button className={`mt-4 bg-purple-500 text-white p-2 rounded ${selectedMethod === '' ? 'disabled opacity-50 cursor-not-allowed' : ''}`} onClick={submitHandler}>
                             Make a payment
@@ -89,20 +85,4 @@ export default function PaymentMethod() {
     );
 }
 
-function PaymentOption({ icon, title, description, selected, onSelect }) {
-    return (
-        <div
-            onClick={onSelect}
-            className={`flex items-center justify-between py-2 ${selected ? 'bg-blue-300 cursor-pointer hover:bg-blue-400' : 'cursor-pointer hover:bg-blue-200'
-                }`}
-        >
-            <div className="flex items-center">
-                {icon && <span className="mr-2">{icon}</span>}
-                <span className='text-white-500'>{title}</span>
-                {description && (
-                    <span className="ml-2 text-gray-500">{description}</span>
-                )}
-            </div>
-        </div>
-    );
-}
+
