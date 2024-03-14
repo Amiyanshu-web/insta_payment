@@ -21,7 +21,9 @@ export default function PaymentMethod() {
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(selectedMethod);
-        localStorage.setItem('paymentMethod', selectedMethod);
+        if (typeof window !== 'undefined'){
+            localStorage.setItem('paymentMethod', selectedMethod);
+        }
         dispatch(setSelectedPaymentMethod(selectedMethod)); // Dispatch action to store selectedMethod in Redux store
         if (selectedMethod !== '') router.push('/orderdetails');
     }

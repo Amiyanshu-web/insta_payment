@@ -1,9 +1,21 @@
 // slices/paymentSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-    selectedMethod: localStorage.getItem('paymentMethod') || ''
+
+const getInitialState = () => {
+    if (typeof window !== 'undefined') {
+        return {
+            selectedMethod: localStorage.getItem('paymentMethod') || ''
+        };
+    } else {
+        // Provide a fallback value if localStorage is not available
+        return {
+            selectedMethod: ''
+        };
+    }
 };
+
+const initialState = getInitialState();
 
 const paymentSlice = createSlice({
     name: 'payment',

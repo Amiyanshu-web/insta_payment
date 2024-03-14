@@ -37,7 +37,11 @@ export const {
 export const fetchProducts = () => async (dispatch) => {
     try {
         dispatch(fetchProductsStart());
-        const cachedProducts = localStorage.getItem('data');
+        let cachedProducts = null;
+        if(typeof window !== 'undefined'){
+
+            cachedProducts = localStorage.getItem('data');
+        }
         if (cachedProducts) {
             const parsedProducts = JSON.parse(cachedProducts);
             dispatch(fetchProductsSuccess(parsedProducts));

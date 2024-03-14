@@ -1,12 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Message from '../component/message';
 import { default as NumberFormat } from 'react-number-format';
 import CheckoutSteps from '../component/checkoutsteps';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '@/redux/slices/productSlice';
-import { setSelectedPaymentMethod } from '@/redux/slices/paymentSlice';
 
 
 export default function OrderDetails() {
